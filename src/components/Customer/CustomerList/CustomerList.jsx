@@ -18,7 +18,7 @@ const CustomerList = ({}) => {
       </thead>
       <tbody>
       {details.map((detail,i) => (
-        <tr key={`${detail}`}>
+        <tr key={`${detail} + ${i}`}>
           <td>{detail.name}</td>
           <td>{detail.website}</td>
           <td>{detail.revenue}</td>
