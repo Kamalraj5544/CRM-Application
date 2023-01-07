@@ -7,11 +7,15 @@ const CustomerForm = () => {
   const [formDetails, setFormDetails] = useState({
     name: "",
     website: "",
-    revenue: "",
-    noOfEmployees: "",
-    CEOname: "",
-    establishedYear: "",
+    turnover: "",
+    employes: "",
+    ceo: "",
+    year: "",
   });
+
+  const handlePostData = async (data) => {
+    const response = fetch()
+  }
   return (
     <div className="form">
       <h1>Customer Details</h1>
@@ -45,9 +49,9 @@ const CustomerForm = () => {
           <Form.Control
             type="text"
             placeholder="Enter revenue"
-            value={formDetails.revenue}
+            value={formDetails.turnover}
             onChange={(e) =>
-              setFormDetails({ ...formDetails, revenue: e.target.value })
+              setFormDetails({ ...formDetails, turnover: e.target.value })
             }
           />
         </Form.Group>
@@ -57,9 +61,9 @@ const CustomerForm = () => {
           <Form.Control
             type="text"
             placeholder="Enter no.of employees"
-            value={formDetails.noOfEmployees}
+            value={formDetails.employes}
             onChange={(e) =>
-              setFormDetails({ ...formDetails, noOfEmployees: e.target.value })
+              setFormDetails({ ...formDetails, employes: e.target.value })
             }
           />
         </Form.Group>
@@ -69,9 +73,9 @@ const CustomerForm = () => {
           <Form.Control
             type="text"
             placeholder="CEO name"
-            value={formDetails.CEOname}
+            value={formDetails.ceo}
             onChange={(e) =>
-              setFormDetails({ ...formDetails, CEOname: e.target.value })
+              setFormDetails({ ...formDetails, ceo: e.target.value })
             }
           />
         </Form.Group>
@@ -81,17 +85,21 @@ const CustomerForm = () => {
           <Form.Control
             type="text"
             placeholder="Established Year"
-            value={formDetails.establishedYear}
+            value={formDetails.year}
             onChange={(e) =>
               setFormDetails({
                 ...formDetails,
-                establishedYear: e.target.value,
+                year: e.target.value,
               })
             }
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={(event) => {
+          event.preventDefault();
+          console.log(formDetails);
+
+        }}>
           Submit
         </Button>
       </Form>

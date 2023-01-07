@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Button from 'react-bootstrap/esm/Button';
 import Table from 'react-bootstrap/Table';
-import details from '../../../Customer.json'
+import { Link } from 'react-router-dom';
 
-const CustomerList = ({}) => {
+
+const CustomerList = () => {
+  const [details, setDetails] = useState([])
+  useEffect(() => {
+
+    fetch('http://localhost:4000/api/customer',{
+      method : 'GET',
+    }).then(response => response.json()).then(
+      (responseData) => {setDetails(responseData)}
+      ).catch((error) => console.log(error))
+
+  }, [])
+  
   return (
     <div className='container'>
+      <Button className='btn btn-success' >
+        <Link to="./form" style={{
+          textDecoration : 'none',
+          color : 'white'
+        }}>Register Form</Link>
+      </Button>
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -21,10 +40,10 @@ const CustomerList = ({}) => {
         <tr key={`${detail} + ${i}`}>
           <td>{detail.name}</td>
           <td>{detail.website}</td>
-          <td>{detail.revenue}</td>
-          <td>{detail.CEOname}</td>
-          <td>{detail.noOfEmployers}</td>
-          <td>{detail.establishedYear}</td>
+          <td>{detail.turnover}</td>
+          <td>{detail.ceo}</td>
+          <td>{detail.employees}</td>
+          <td>{detail.year}</td>
         </tr>
       ))}
       </tbody>
