@@ -9,6 +9,7 @@ const Customer = () => {
       <Router>
         <Routes>
           <Route path="/form" element={<CustomerForm />} />
+          <Route path="/form/:name" element={<CustomerForm />} />
           <Route path="/" element={<CustomerList />} />
         </Routes>
       </Router>
