@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const CustomerForm = () => {
@@ -17,24 +17,52 @@ const CustomerForm = () => {
     year: "",
   });
 
-  if (name) {
-    fetch("http://localhost:4000/api/customer", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((customersData) => {
-        const requiredCustomer = customersData.find(
-          (data) => data.name === name
-        );
-        setFormDetails(requiredCustomer);
-      });
-  }
+  const [isUpdate ,setIsUpdate] = useState(false);
+
+  useEffect(() => {
+    if (name) {
+      fetch("http://localhost:4000/api/customer", {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((customersData) => {
+          const requiredCustomer = customersData.find(
+            (data) => data.name === name
+          );
+          setFormDetails(requiredCustomer);
+          setIsUpdate(true);
+        });
+    }
+  }, []);
 
   const handlePostData = async (data) => {
     try {
       let apiResponse;
       let response = await fetch("http://localhost:4000/api/customer", {
         method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        apiResponse = res;
+      });
+      if (apiResponse.ok) {
+        navigate("/");
+      } else {
+        console.log(apiResponse);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  const handleUpdateData = async (data) => {
+    try {
+      let apiResponse;
+      let response = await fetch("http://localhost:4000/api/customer", {
+        method: "PUT",
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
@@ -135,10 +163,11 @@ const CustomerForm = () => {
           type="submit"
           onClick={(event) => {
             event.preventDefault();
-            handlePostData(formDetails);
+            
+            {isUpdate ? handleUpdateData(formDetails) : handlePostData(formDetails);}
           }}
         >
-          Submit
+          {isUpdate ? "Update customer" : "Create customer"}
         </Button>
       </Form>
     </div>
