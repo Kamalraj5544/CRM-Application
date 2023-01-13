@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+}
+
+.left,.right{
+    width: 50%;
+}
+
+.right{
+    margin-top: 8rem;
+}

@@ -1,8 +1,9 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
 
 const CustomerForm = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const CustomerForm = () => {
     year: "",
   });
 
-  const [isUpdate ,setIsUpdate] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     if (name) {
@@ -57,7 +58,6 @@ const CustomerForm = () => {
     }
   };
 
-
   const handleUpdateData = async (data) => {
     try {
       let apiResponse;
@@ -79,9 +79,11 @@ const CustomerForm = () => {
       console.log(err);
     }
   };
-  return (
+  return (<>
+    <Navbar />
     <div className="form">
       <h1>Customer Details</h1>
+      <Navbar />
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Name</Form.Label>
@@ -163,15 +165,19 @@ const CustomerForm = () => {
           type="submit"
           onClick={(event) => {
             event.preventDefault();
-            
-            {isUpdate ? handleUpdateData(formDetails) : handlePostData(formDetails);}
+
+            {
+              isUpdate
+                ? handleUpdateData(formDetails)
+                : handlePostData(formDetails);
+            }
           }}
         >
           {isUpdate ? "Update customer" : "Create customer"}
         </Button>
       </Form>
     </div>
-  );
+  </>);
 };
 
 export default CustomerForm;
