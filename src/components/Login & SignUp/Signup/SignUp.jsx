@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import "./SignUp.css";
 
@@ -12,17 +13,24 @@ const SignUp = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handlePostData = async () => {
+    let apiResponse;
     try {
       const response = await fetch("http://localhost:4000/api/user/signup", {
         method: "POST",
         body: JSON.stringify(userDetails),
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => console.log(response))
+        .then((response) => apiResponse = response )
         .catch((err) => console.log(err));
+        console.log(apiResponse);
+        if(apiResponse.ok){
+            navigate("/login")
+        }
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +93,7 @@ const SignUp = () => {
               handlePostData();
             }}
           >
-            Submit
+            Register
           </Button>
         </Form>
       </div>

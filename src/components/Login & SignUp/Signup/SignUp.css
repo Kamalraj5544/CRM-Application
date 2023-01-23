@@ -1,11 +1,18 @@
 .container{
     display: flex;
-}
-
-.left,.right{
-    width: 50%;
+    justify-content: center;
+    align-items: center;
 }
 
 .right{
-    margin-top: 8rem;
+    margin-top: 3.8rem;
+    width: 50vw;
+    border-left: 1px solid lightgray;
+    padding-left: 2.35rem;
+}
+
+img{
+    padding: 2rem;
+    width: 40vw;
+    object-fit: contain;
 }

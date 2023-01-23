@@ -8,12 +8,15 @@ import "./CustomerList.css";
 import Navbar from "../../Navbar/Navbar";
 
 const CustomerList = () => {
-
   const [details, setDetails] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/customer", {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+    console.log(isLoggedIn);
+
+    if(isLoggedIn && isLoggedIn === "true") {
+      fetch("http://localhost:4000/api/customer", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -21,6 +24,12 @@ const CustomerList = () => {
         setDetails(responseData);
       })
       .catch((error) => console.log(error));
+      navigate("/");
+    }else{
+      console.log("not Logged in")
+      navigate("./login");
+    }
+    
   }, []);
 
   const handleEdit = (name) => {
@@ -29,20 +38,19 @@ const CustomerList = () => {
 
   const handleDelete = (detail) => {
     try {
-
       fetch(`http://localhost:4000/api/customer/${detail.name}`, {
         method: "DELETE",
       }).then((response) => console.log(response));
 
       setTimeout(() => {
-      fetch("http://localhost:4000/api/customer", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((responseData) => {
-          setDetails(responseData);
+        fetch("http://localhost:4000/api/customer", {
+          method: "GET",
         })
-        .catch((error) => console.log(error));
+          .then((response) => response.json())
+          .then((responseData) => {
+            setDetails(responseData);
+          })
+          .catch((error) => console.log(error));
       }, 100);
     } catch (err) {
       console.log(err);
@@ -52,11 +60,12 @@ const CustomerList = () => {
   return (
     <div>
       <Navbar />
-      <div className="container">
-        <Button className="btn btn-success" onClick={() => navigate("/form")}>
-          Register Customer
-        </Button>
-        <br />
+      <div className="container-fluid">
+        <div>
+          <Button className="btn btn-success" onClick={() => navigate("/form")}>
+            Register Customer
+          </Button>
+        </div>
         <Table striped bordered hover className="app__table">
           <thead>
             <tr>
