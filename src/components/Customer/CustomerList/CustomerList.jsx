@@ -5,31 +5,30 @@ import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
 
 import "./CustomerList.css";
-import Navbar from "../../Navbar/Navbar";
+import NavBar from "../../Navbar/NavBar";
 
 const CustomerList = () => {
   const [details, setDetails] = useState([]);
   const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("loggedIn");
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("loggedIn");
     console.log(isLoggedIn);
 
-    if(isLoggedIn && isLoggedIn === "true") {
+    if (isLoggedIn && isLoggedIn === "true") {
       fetch("http://localhost:4000/api/customer", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        setDetails(responseData);
+        method: "GET",
       })
-      .catch((error) => console.log(error));
+        .then((response) => response.json())
+        .then((responseData) => {
+          setDetails(responseData);
+        })
+        .catch((error) => console.log(error));
       navigate("/");
-    }else{
-      console.log("not Logged in")
-      navigate("./login");
+    } else {
+      // console.log("not Logged in")
+      // navigate("./login");
     }
-    
   }, []);
 
   const handleEdit = (name) => {
@@ -59,12 +58,17 @@ const CustomerList = () => {
 
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <div className="container-fluid">
         <div>
-          <Button className="btn btn-success" onClick={() => navigate("/form")}>
-            Register Customer
-          </Button>
+          {isLoggedIn && (
+            <Button
+              className="btn btn-success"
+              onClick={() => navigate("/form")}
+            >
+              Register Customer
+            </Button>
+          )}
         </div>
         <Table striped bordered hover className="app__table">
           <thead>
@@ -113,14 +117,15 @@ const CustomerList = () => {
                   </td>
                 </tr>
               ))}
-
-            {details.length === 0 && (
-              <Alert key="primary" variant="primary">
-                There is no data to display
-              </Alert>
-            )}
           </tbody>
         </Table>
+
+        {details.length === 0 && (
+          <Alert key="primary" variant="warning" className="alert">
+            Please Login to see customer Details.
+            <Alert.Link href="/login"> Click here</Alert.Link>
+          </Alert>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
 import Customer from "./components/pages/Customer/Customer";
 
 

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../../Navbar/Navbar";
+import NavBar from "../../Navbar/NavBar";
 
 const CustomerForm = () => {
   const navigate = useNavigate();
@@ -69,11 +69,11 @@ const CustomerForm = () => {
   };
   return (
     <>
-      <Navbar />
+      <NavBar />
       <div className="container-fluid">
         <h1>Enter Customer Details</h1>
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
@@ -85,7 +85,7 @@ const CustomerForm = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicWebsite">
             <Form.Label>Website</Form.Label>
             <Form.Control
               type="text"
@@ -97,7 +97,7 @@ const CustomerForm = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicRevenue">
             <Form.Label>Revenue</Form.Label>
             <Form.Control
               type="text"
@@ -109,7 +109,7 @@ const CustomerForm = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicNoOfEmp">
             <Form.Label>Number of Employers</Form.Label>
             <Form.Control
               type="text"
@@ -121,7 +121,7 @@ const CustomerForm = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formBasicCEO">
             <Form.Label>CEO</Form.Label>
             <Form.Control
               type="text"
@@ -133,7 +133,7 @@ const CustomerForm = () => {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formBasicYear">
             <Form.Label>Established Year</Form.Label>
             <Form.Control
               type="text"

@@ -5,3 +5,7 @@
 .app__table{
     margin : 20px auto;
 }
+
+.alert{
+    text-align: center;
+}
