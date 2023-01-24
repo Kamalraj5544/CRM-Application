@@ -70,7 +70,7 @@ const CustomerList = () => {
             </Button>
           )}
         </div>
-        <Table striped bordered hover className="app__table">
+        <Table striped bordered hover className="app__table" responsive>
           <thead>
             <tr>
               <th>Name</th>
