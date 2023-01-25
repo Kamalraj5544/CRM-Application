@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/esm/Button";
-import Table from "react-bootstrap/Table";
-import Alert from "react-bootstrap/Alert";
+import { useEffect, useState } from "react";
+
+import { Button,Alert,Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import "./CustomerList.css";
+
 import NavBar from "../../Navbar/NavBar";
+import "./CustomerList.css";
 
 const CustomerList = () => {
+
   const [details, setDetails] = useState([]);
   const navigate = useNavigate();
+
   const isLoggedIn = localStorage.getItem("loggedIn");
 
   useEffect(() => {
-    console.log(isLoggedIn);
 
     if (isLoggedIn && isLoggedIn === "true") {
       fetch("http://localhost:4000/api/customer", {
@@ -25,10 +26,8 @@ const CustomerList = () => {
         })
         .catch((error) => console.log(error));
       navigate("/");
-    } else {
-      // console.log("not Logged in")
-      // navigate("./login");
     }
+    
   }, []);
 
   const handleEdit = (name) => {
@@ -63,14 +62,14 @@ const CustomerList = () => {
         <div>
           {isLoggedIn && (
             <Button
-              className="btn btn-success"
+              variant="primary"
               onClick={() => navigate("/form")}
             >
               Register Customer
             </Button>
           )}
         </div>
-        <Table striped bordered hover className="app__table" responsive>
+        <Table striped bordered hover variant="dark" className="app__table" responsive>
           <thead>
             <tr>
               <th>Name</th>

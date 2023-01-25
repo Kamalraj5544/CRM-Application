@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import "./SignUp.css";
 
@@ -25,12 +25,12 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => apiResponse = response )
+        .then((response) => (apiResponse = response))
         .catch((err) => console.log(err));
-        console.log(apiResponse);
-        if(apiResponse.ok){
-            navigate("/login")
-        }
+      console.log(apiResponse);
+      if (apiResponse.ok) {
+        navigate("/login");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -44,11 +44,11 @@ const SignUp = () => {
         />
       </div>
       <div className="right">
-        <h2>Please Register to continue...</h2>
+        <h2>Please register to continue...</h2>
         <hr />
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Name : </Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter name"
@@ -60,7 +60,7 @@ const SignUp = () => {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email address : </Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -75,7 +75,7 @@ const SignUp = () => {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password : </Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -85,16 +85,19 @@ const SignUp = () => {
               }
             />
           </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              handlePostData();
-            }}
-          >
-            Register
-          </Button>
+          <div className="d-grid gap-1">
+            <Button
+              variant="success"
+              type="submit"
+              size="lg"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePostData();
+              }}
+            >
+              Sign Up
+            </Button>
+          </div>
         </Form>
       </div>
     </div>

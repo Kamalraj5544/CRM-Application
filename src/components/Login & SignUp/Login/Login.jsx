@@ -1,7 +1,5 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
+import { Button, Form, Alert } from "react-bootstrap";
+import { FiLogIn } from "react-icons/fi";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -51,14 +49,20 @@ const Login = () => {
         />
       </div>
       <div className="right">
-        <h2>Please Login to continue...</h2>
+        <h2 className="login-header">
+          Please Login <FiLogIn /> to continue...
+        </h2>
         <hr />
 
-        {error && <Alert variant="danger">Invalid Credentials</Alert>}
+        {error && (
+          <Alert variant="danger">
+            Invalid Credentials 😥 Please enter correct Email and Password
+          </Alert>
+        )}
 
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email address : </Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter your email"
@@ -68,12 +72,12 @@ const Login = () => {
               }
             />
             <Form.Text className="text-muted">
-              Please enter your registered email address
+              Please enter your registered email address:
             </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password :</Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter your Password"
@@ -83,17 +87,34 @@ const Login = () => {
               }
             />
           </Form.Group>
+          <div className="d-grid">
+            <Button
+              variant="success"
+              size="lg"
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePostData();
+              }}
+            >
+              LOGIN <FiLogIn />
+            </Button>
+          </div>
+        </Form>
+        <br />
+        <div className="create-btn">
+          <p>Not a user, register here⬇️...</p>
           <Button
-            variant="success"
+            variant="primary"
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              handlePostData();
+              navigate("/signup");
             }}
           >
-            Login
+            Create User
           </Button>
-        </Form>
+        </div>
       </div>
     </div>
   );

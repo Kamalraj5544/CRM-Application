@@ -6,13 +6,20 @@
 
 .right{
     margin-top: 3.8rem;
-    width: 50vw;
+    width: 70%;
     border-left: 1px solid lightgray;
-    padding-left: 2.35rem;
+    padding: 0 2.1rem;
 }
 
 img{
     padding: 2rem;
-    width: 40vw;
-    object-fit: contain;
+    width: 35vw;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 500px){
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
 }

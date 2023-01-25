@@ -1,11 +1,12 @@
-.container-fluid{
-    margin: 2rem;
+.container-fluid {
+  margin: 2rem;
 }
 
-.app__table{
-    margin : 20px auto;
+.app__table {
+  margin: 20px auto;
 }
 
-.alert{
-    text-align: center;
+.alert {
+  text-align: center;
 }
+
