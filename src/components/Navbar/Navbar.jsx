@@ -44,6 +44,7 @@ const NavBar = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/users">Users</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link eventKey={2}>
@@ -59,14 +60,6 @@ const NavBar = () => {
 
                 {!loggedIn && (
                   <div className="buttons">
-                    <Nav.Item>
-                      <Button
-                        variant="primary button"
-                        onClick={() => navigate("/signup")}
-                      >
-                        Sign Up
-                      </Button>
-                    </Nav.Item>
                     <Nav.Item>
                       <Button
                         variant="success button"

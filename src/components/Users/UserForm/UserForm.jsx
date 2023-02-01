@@ -1,19 +1,21 @@
-import React from "react";
+import React from 'react'
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "./SignUp.css";
 
-const SignUp = () => {
-  const [userDetails, setUserDetails] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+const UserForm = () => {
 
-  const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState({
+        name: "",
+        username:"",
+        email: "",
+        password: "",
+        isActive:true,
+      });
+
+      const navigate = useNavigate();
 
   const handlePostData = async () => {
     let apiResponse;
@@ -28,8 +30,9 @@ const SignUp = () => {
         .then((response) => (apiResponse = response))
         .catch((err) => console.log(err));
       console.log(apiResponse);
+      
       if (apiResponse.ok) {
-        navigate("/login");
+        navigate("/users");
       }
     } catch (error) {
       console.log(error);
@@ -44,10 +47,10 @@ const SignUp = () => {
         />
       </div>
       <div className="right">
-        <h2>Please register to continue...</h2>
+        <h2>Enter the user details...</h2>
         <hr />
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name : </Form.Label>
             <Form.Control
               type="text"
@@ -55,6 +58,18 @@ const SignUp = () => {
               value={userDetails.name}
               onChange={(e) =>
                 setUserDetails({ ...userDetails, name: e.target.value })
+              }
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicUserName">
+            <Form.Label>Username : </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Username"
+              value={userDetails.userName}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, username: e.target.value })
               }
             />
           </Form.Group>
@@ -69,9 +84,6 @@ const SignUp = () => {
                 setUserDetails({ ...userDetails, email: e.target.value })
               }
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -95,13 +107,13 @@ const SignUp = () => {
                 handlePostData();
               }}
             >
-              Sign Up
+              Create user
             </Button>
           </div>
         </Form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default UserForm

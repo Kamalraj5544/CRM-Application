@@ -10,6 +10,7 @@ const Login = () => {
   const [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
+    isActive: true
   });
 
   const [error, setError] = useState(false);
@@ -102,19 +103,6 @@ const Login = () => {
           </div>
         </Form>
         <br />
-        <div className="create-btn">
-          <p>Not a user, register here⬇️...</p>
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate("/signup");
-            }}
-          >
-            Create User
-          </Button>
-        </div>
       </div>
     </div>
   );

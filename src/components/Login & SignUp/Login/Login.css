@@ -1,7 +1,17 @@
 
 .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
+}
+
+.right{
+    margin-top: 3.8rem;
+    width: 65%;
+    border-left: 1px solid lightgray;
+    padding: 0 2.1rem;
 }
 
 .login-header{
@@ -14,9 +24,18 @@ p{
     color: rgba(241, 34, 34, 0.861);
 }
 
-.create-btn{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+img{
+    padding: 2rem;
+    width: 35vw;
+    object-fit: cover;
 }
+
+@media screen and (max-width: 500px){
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+

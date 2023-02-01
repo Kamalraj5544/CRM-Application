@@ -1,16 +1,24 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CustomerForm from "../../Customer/CustomerForm/CustomerForm";
 import CustomerList from "../../Customer/CustomerList/CustomerList";
-import SignUp from "../../Login & SignUp/Signup/SignUp";
 import Login from "../../Login & SignUp/Login/Login";
 import SecuredRoutes from "../../SecuredRoutes/SecuredRoutes";
+import UserForm from "../../Users/UserForm/UserForm";
+import UserList from "../../Users/UserList/UserList";
 
 const Customer = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<CustomerList />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/"
+          element={
+            <SecuredRoutes>
+              <CustomerList />
+            </SecuredRoutes>
+          }
+        />
+        {/* <Route path="/signup" element={<SignUp />} /> */}
         <Route path="/login" element={<Login />} />
         <Route
           path="/form"
@@ -25,6 +33,22 @@ const Customer = () => {
           element={
             <SecuredRoutes>
               <CustomerForm />
+            </SecuredRoutes>
+          }
+        />
+        <Route
+          path="/users"
+          element={
+            <SecuredRoutes>
+              <UserList />
+            </SecuredRoutes>
+          }
+        />
+        <Route
+          path="/userForm"
+          element={
+            <SecuredRoutes>
+              <UserForm />
             </SecuredRoutes>
           }
         />

@@ -1,33 +1,25 @@
 import { useEffect, useState } from "react";
 
-import { Button,Alert,Table } from "react-bootstrap";
+import { Button, Alert, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
 
 import NavBar from "../../Navbar/NavBar";
 import "./CustomerList.css";
 
 const CustomerList = () => {
-
   const [details, setDetails] = useState([]);
   const navigate = useNavigate();
 
-  const isLoggedIn = localStorage.getItem("loggedIn");
-
   useEffect(() => {
-
-    if (isLoggedIn && isLoggedIn === "true") {
-      fetch("http://localhost:4000/api/customer", {
-        method: "GET",
+    fetch("http://localhost:4000/api/customer", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        setDetails(responseData);
       })
-        .then((response) => response.json())
-        .then((responseData) => {
-          setDetails(responseData);
-        })
-        .catch((error) => console.log(error));
-      navigate("/");
-    }
-    
+      .catch((error) => console.log(error));
+    navigate("/");
   }, []);
 
   const handleEdit = (name) => {
@@ -60,22 +52,25 @@ const CustomerList = () => {
       <NavBar />
       <div className="container-fluid">
         <div>
-          {isLoggedIn && (
-            <Button
-              variant="primary"
-              onClick={() => navigate("/form")}
-            >
-              Register Customer
-            </Button>
-          )}
+          <Button variant="primary" onClick={() => navigate("/form")}>
+            Register Customer
+          </Button>
         </div>
-        <Table striped bordered hover variant="dark" className="app__table" responsive>
+        <h1 className="list-header">Customer Details</h1>
+        <Table
+          striped
+          bordered
+          hover
+          variant="dark"
+          className="app__table"
+          responsive
+        >
           <thead>
             <tr>
               <th>Name</th>
               <th>Website</th>
               <th>Revenue</th>
-              <th>Number of Employers</th>
+              <th>Number of Employees</th>
               <th>CEO</th>
               <th>Established Year</th>
               <th>Edit customer</th>
@@ -89,8 +84,8 @@ const CustomerList = () => {
                   <td>{detail.name}</td>
                   <td>{detail.website}</td>
                   <td>{detail.turnover}</td>
-                  <td>{detail.ceo}</td>
                   <td>{detail.employees}</td>
+                  <td>{detail.ceo}</td>
                   <td>{detail.year}</td>
                   <td>
                     <Button
@@ -121,8 +116,7 @@ const CustomerList = () => {
 
         {details.length === 0 && (
           <Alert key="primary" variant="warning" className="alert">
-            Please Login to see customer Details.
-            <Alert.Link href="/login"> Click here</Alert.Link>
+            There is no customer details to show.
           </Alert>
         )}
       </div>
