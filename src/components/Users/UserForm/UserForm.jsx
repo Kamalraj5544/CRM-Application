@@ -1,24 +1,23 @@
-import React from 'react'
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const UserForm = () => {
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    isActive: false,
+  });
 
-    const [userDetails, setUserDetails] = useState({
-        name: "",
-        username:"",
-        email: "",
-        password: "",
-        isActive:true,
-      });
-
-      const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handlePostData = async () => {
     let apiResponse;
+    console.log(userDetails);
     try {
       const response = await fetch("http://localhost:4000/api/user/signup", {
         method: "POST",
@@ -30,7 +29,7 @@ const UserForm = () => {
         .then((response) => (apiResponse = response))
         .catch((err) => console.log(err));
       console.log(apiResponse);
-      
+
       if (apiResponse.ok) {
         navigate("/users");
       }
@@ -67,7 +66,7 @@ const UserForm = () => {
             <Form.Control
               type="text"
               placeholder="Enter Username"
-              value={userDetails.userName}
+              value={userDetails.username}
               onChange={(e) =>
                 setUserDetails({ ...userDetails, username: e.target.value })
               }
@@ -97,6 +96,12 @@ const UserForm = () => {
               }
             />
           </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Terms and Conditions" onChange={(e) =>
+                setUserDetails({ ...userDetails, isActive: e.target.checked })
+              }  />
+          </Form.Group>
           <div className="d-grid gap-1">
             <Button
               variant="success"
@@ -113,7 +118,7 @@ const UserForm = () => {
         </Form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserForm
+export default UserForm;

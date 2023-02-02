@@ -56,23 +56,18 @@ const CustomerList = () => {
             Register Customer
           </Button>
         </div>
-        <h1 className="list-header">Customer Details</h1>
-        <Table
-          striped
-          bordered
-          hover
-          variant="dark"
-          className="app__table"
-          responsive
-        >
+        <h1 className="center-header">Customer Details</h1>
+        <Table variant="dark" className="app__table" responsive>
           <thead>
             <tr>
               <th>Name</th>
               <th>Website</th>
-              <th>Revenue</th>
-              <th>Number of Employees</th>
               <th>CEO</th>
               <th>Established Year</th>
+              <th>Revenue</th>
+              <th>Number of Employees</th>
+
+              <th>Status</th>
               <th>Edit customer</th>
               <th>Delete customer</th>
             </tr>
@@ -83,17 +78,28 @@ const CustomerList = () => {
                 <tr key={`${detail} + ${i}`}>
                   <td>{detail.name}</td>
                   <td>{detail.website}</td>
-                  <td>{detail.turnover}</td>
-                  <td>{detail.employees}</td>
                   <td>{detail.ceo}</td>
                   <td>{detail.year}</td>
+                  <td>{detail.turnover}</td>
+                  <td>{detail.employees}</td>
+                  <td
+                    className={
+                      detail.status === "New"
+                        ? "status-new"
+                        : detail.status === "Accepted"
+                        ? "status-accepted"
+                        : "status-rejected"
+                    }
+                  >
+                    {detail.status}
+                  </td>
                   <td>
                     <Button
                       onClick={(e) => {
                         e.preventDefault();
                         handleEdit(detail.name);
                       }}
-                      className="btn btn-warning"
+                      className="btn btn-warning floatRight"
                     >
                       Edit
                     </Button>
@@ -104,7 +110,7 @@ const CustomerList = () => {
                         e.preventDefault();
                         handleDelete(detail);
                       }}
-                      className="btn btn-danger"
+                      className="btn btn-danger floatRight"
                     >
                       Delete
                     </Button>

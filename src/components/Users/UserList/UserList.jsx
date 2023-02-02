@@ -8,6 +8,26 @@ const UserList = () => {
   const [usersAvailable, setUsersAvailable] = useState([]);
   const navigate = useNavigate();
 
+  const handleIsActive = (username,isActive) => {
+    fetch(
+      `http://localhost:4000/api/user/${
+        isActive ? "deActivate" : "activate"
+      }/${username}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log(response);
+        setUsersAvailable(response);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     fetch("http://localhost:4000/api/user", {
       method: "GET",
@@ -52,7 +72,13 @@ const UserList = () => {
                   <td>{user.name}</td>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
-                  <td>{user.isActive ? "Yes" : "No"}</td>
+                  <td>
+                    { 
+                      <Button variant={user.isActive ? "danger" : "success"} onClick={() => handleIsActive(user.username,user.isActive)}>
+                        {user.isActive ? "Deactivate" : "Activate"}
+                      </Button>
+                    }
+                  </td>
                 </tr>
               ))}
           </tbody>

@@ -20,6 +20,7 @@ const CustomerForm = () => {
     employees: "",
     ceo: "",
     year: "",
+    status: "",
   });
 
   const [isUpdate, setIsUpdate] = useState(false);
@@ -41,6 +42,7 @@ const CustomerForm = () => {
   }, []);
 
   const handlePostData = async () => {
+    console.log(formDetails)
     try {
       let response = await fetch("http://localhost:4000/api/customer", {
         method: "POST",
@@ -72,7 +74,7 @@ const CustomerForm = () => {
       <NavBar />
       <Container fluid>
         <div className="form-container">
-          <h1>Enter Customer Details</h1>
+          <h1 className="center-header">Enter Customer Details</h1>
           <hr />
           <Form>
             <Form.Group className="mb-3" controlId="formBasicName">
@@ -149,7 +151,21 @@ const CustomerForm = () => {
                 }
               />
             </Form.Group>
-            <div className="d-grid">
+            <Form.Group className="mb-3" controlId="formBasicStatus">
+              <Form.Label>Status</Form.Label>
+              <Form.Select onChange={(e) => {
+                e.preventDefault();
+                setFormDetails({
+                    ...formDetails,
+                    status: e.target.value,
+                  })
+              }}>
+                {/* <option>Status</option>. */}
+                <option aria-label="Default select example" value="New">New</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+              </Form.Select>
+            </Form.Group>
               <Button
                 variant="primary"
                 type="submit"
@@ -164,7 +180,7 @@ const CustomerForm = () => {
               >
                 {isUpdate ? "Update customer" : "Create customer"}
               </Button>
-            </div>
+
           </Form>
         </div>
       </Container>

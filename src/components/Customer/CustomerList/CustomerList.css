@@ -10,8 +10,20 @@
   text-align: center;
 }
 
-.list-header{
+.center-header{
   padding: 1rem 0;
   text-align: center;
+}
+
+.status-new{
+  background: rgb(74, 74, 228)  !important;
+}
+
+.status-accepted{
+  background: rgba(96, 238, 96, 0.904) !important;
+}
+
+.status-rejected{
+  background: rgba(225, 66, 66, 0.959) !important;
 }
 
