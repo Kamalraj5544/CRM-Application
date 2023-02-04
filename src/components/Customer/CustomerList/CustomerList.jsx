@@ -1,31 +1,44 @@
 import { useEffect, useState } from "react";
 
 import { InputGroup, Form, Button, Alert, Table } from "react-bootstrap";
-import { FcSearch } from "react-icons/fc";
+import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 import Dashboard from "../Dashboard/Dashboard";
 import NavBar from "../../Navbar/NavBar";
 import "./CustomerList.css";
+import PaginationTab from "../../Pagination/PaginationTab";
 
 const CustomerList = () => {
+
   const [customers, setCustomers] = useState([]);
   const [filteredCustomers, setFilteredCustomers] = useState([]);
+  const [pages, setPages] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("hello");
-    fetch("http://localhost:4000/api/customer", {
+    loadPage(1);
+  }, []);
+
+  const loadPage = (pageNo) => {
+    fetch("http://localhost:4000/api/customer/page/" + pageNo, {
       method: "GET",
     })
       .then((response) => response.json())
       .then((responseData) => {
-        setCustomers(responseData);
-        setFilteredCustomers(responseData)
+        console.log(responseData);
+        setCustomers(responseData.records);
+        setFilteredCustomers(responseData.records);
+        const totalPages = Math.ceil(
+          responseData.totalCount / 100
+        );
+        // console.log(totalPages);
+        const pages = new Array(totalPages).fill(0);
+        setPages(pages);
       })
       .catch((error) => console.log(error));
-    navigate("/");
-  }, []);
+  };
 
   const handleEdit = (name) => {
     navigate("/form/" + name);
@@ -54,13 +67,13 @@ const CustomerList = () => {
 
   const handleSearch = (searchinput) => {
     if (!searchinput) {
-      setFilteredCustomers(customers)
+      setFilteredCustomers(customers);
     } else {
-      const filterdCustomers = customers.filter((customer) =>
-        customer.name.includes(searchinput)
+      const filtered = customers.filter((customer) =>
+        customer.name.toLowerCase().includes(searchinput.toLowerCase())
       );
-      setFilteredCustomers(filterdCustomers);
-    }
+      setFilteredCustomers(filtered);
+    } 
   };
 
   return (
@@ -87,7 +100,7 @@ const CustomerList = () => {
                   onChange={(e) => handleSearch(e.target.value)}
                 />
                 <Button variant="outline-secondary" id="button-addon2">
-                  <FcSearch />
+                  <RiSearchLine />
                 </Button>
               </InputGroup>
             </div>
@@ -156,12 +169,13 @@ const CustomerList = () => {
               ))}
           </tbody>
         </Table>
-
         {filteredCustomers.length === 0 && (
           <Alert key="primary" variant="warning" className="alert">
             There is no customer details to show.
           </Alert>
         )}
+
+        <PaginationTab pages={pages} loadPage={loadPage} />
       </div>
     </div>
   );

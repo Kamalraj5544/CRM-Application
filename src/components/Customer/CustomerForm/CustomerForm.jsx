@@ -1,7 +1,4 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
+import { Button,Form,Container } from "react-bootstrap";
 
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +7,8 @@ import NavBar from "../../Navbar/NavBar";
 import "./CustomerForm.css";
 
 const CustomerForm = () => {
+  const [isUpdate, setIsUpdate] = useState(false);
+
   const navigate = useNavigate();
   const { name } = useParams();
 
@@ -22,8 +21,6 @@ const CustomerForm = () => {
     year: "",
     status: "",
   });
-
-  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     if (name) {
