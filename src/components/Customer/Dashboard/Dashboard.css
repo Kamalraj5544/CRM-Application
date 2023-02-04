@@ -1,0 +1,38 @@
+.dashboard-container{
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem
+}
+
+.tile{
+    width: 25%;
+    height: 20%;
+    border: 1px solid lightgray;
+    padding: 2rem 2.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.total-customers{
+    background-color: gray;
+    color: black;
+}
+
+.new-customers{
+    background-color: rgba(86, 86, 224, 0.906);
+    color: black;
+}
+
+.accpeted-customers{
+    background-color: greenyellow;
+    color: black;
+}
+
+.rejected-customers{
+    background-color: rgba(220, 87, 87, 0.922);
+    color: black;
+}
