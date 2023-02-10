@@ -1,4 +1,4 @@
-import { Button,Form,Container } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
 
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,7 +10,7 @@ const CustomerForm = () => {
   const [isUpdate, setIsUpdate] = useState(false);
 
   const navigate = useNavigate();
-  const { name } = useParams();
+  const { customerName } = useParams();
 
   const [formDetails, setFormDetails] = useState({
     name: "",
@@ -23,26 +23,24 @@ const CustomerForm = () => {
   });
 
   useEffect(() => {
-    if (name) {
-      fetch("http://localhost:4000/api/customer", {
-        method: "GET",
-      })
+
+    if (customerName) {
+      fetch("http://localhost:4000/api/customer/" + customerName)
         .then((res) => res.json())
         .then((customersData) => {
-          const requiredCustomer = customersData.find(
-            (data) => data.name === name
-          );
-          setFormDetails(requiredCustomer);
+          console.log(customersData);
+          setFormDetails(customersData);
           setIsUpdate(true);
         });
     }
   }, []);
 
   const handlePostData = async () => {
-    console.log(formDetails)
+
+    const methodName = customerName ? "PUT" : "POST";
     try {
       let response = await fetch("http://localhost:4000/api/customer", {
-        method: "POST",
+        method: methodName,
         body: JSON.stringify(formDetails),
         headers: {
           "Content-Type": "application/json",
@@ -53,19 +51,6 @@ const CustomerForm = () => {
     }
   };
 
-  const handleUpdateData = async (data) => {
-    try {
-      let response = await fetch("http://localhost:4000/api/customer", {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => (res.ok ? navigate("/") : console.log(res)));
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <>
       <NavBar />
@@ -150,34 +135,34 @@ const CustomerForm = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicStatus">
               <Form.Label>Status</Form.Label>
-              <Form.Select onChange={(e) => {
-                e.preventDefault();
-                setFormDetails({
+              <Form.Select
+                onChange={(e) => {
+                  e.preventDefault();
+                  setFormDetails({
                     ...formDetails,
                     status: e.target.value,
-                  })
-              }}>
+                  });
+                }}
+              >
                 {/* <option>Status</option>. */}
-                <option aria-label="Default select example" value="New">New</option>
+                <option aria-label="Default select example" value="New">
+                  New
+                </option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
               </Form.Select>
             </Form.Group>
-              <Button
-                variant="primary"
-                type="submit"
-                className="floatRight"
-                onClick={(event) => {
-                  event.preventDefault();
-
-                  {
-                    isUpdate ? handleUpdateData() : handlePostData();
-                  }
-                }}
-              >
-                {isUpdate ? "Update customer" : "Create customer"}
-              </Button>
-
+            <Button
+              variant="primary"
+              type="submit"
+              className="floatRight"
+              onClick={(event) => {
+                event.preventDefault();
+                handlePostData();
+              }}
+            >
+              {isUpdate ? "Update customer" : "Create customer"}
+            </Button>
           </Form>
         </div>
       </Container>

@@ -3,6 +3,8 @@ import CustomerForm from "../../Customer/CustomerForm/CustomerForm";
 import CustomerList from "../../Customer/CustomerList/CustomerList";
 import Login from "../../Login & SignUp/Login/Login";
 import SecuredRoutes from "../../SecuredRoutes/SecuredRoutes";
+import TicketForm from "../../Tickets/TicketForm/TicketForm";
+import TicketList from "../../Tickets/TicketList/TicketList";
 import UserForm from "../../Users/UserForm/UserForm";
 import UserList from "../../Users/UserList/UserList";
 
@@ -29,7 +31,7 @@ const Customer = () => {
           }
         />
         <Route
-          path="/form/:name"
+          path="/form/:customerName"
           element={
             <SecuredRoutes>
               <CustomerForm />
@@ -49,6 +51,22 @@ const Customer = () => {
           element={
             <SecuredRoutes>
               <UserForm />
+            </SecuredRoutes>
+          }
+        />
+        <Route
+          path="/ticketList"
+          element={
+            <SecuredRoutes>
+              <TicketList />
+            </SecuredRoutes>
+          }
+        />
+        <Route
+          path="/ticketForm"
+          element={
+            <SecuredRoutes>
+              <TicketForm />
             </SecuredRoutes>
           }
         />

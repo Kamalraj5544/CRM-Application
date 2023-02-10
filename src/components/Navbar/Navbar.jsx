@@ -45,6 +45,7 @@ const NavBar = () => {
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/users">Users</Nav.Link>
+              <Nav.Link href="/ticketList">Ticket List</Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link eventKey={2}>

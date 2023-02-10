@@ -10,7 +10,6 @@ import "./CustomerList.css";
 import PaginationTab from "../../Pagination/PaginationTab";
 
 const CustomerList = () => {
-
   const [customers, setCustomers] = useState([]);
   const [filteredCustomers, setFilteredCustomers] = useState([]);
   const [pages, setPages] = useState([]);
@@ -30,9 +29,7 @@ const CustomerList = () => {
         console.log(responseData);
         setCustomers(responseData.records);
         setFilteredCustomers(responseData.records);
-        const totalPages = Math.ceil(
-          responseData.totalCount / 100
-        );
+        const totalPages = Math.ceil(responseData.totalCount / 100);
         // console.log(totalPages);
         const pages = new Array(totalPages).fill(0);
         setPages(pages);
@@ -44,22 +41,18 @@ const CustomerList = () => {
     navigate("/form/" + name);
   };
 
-  const handleDelete = (detail) => {
+  const handleDelete = (customer) => {
     try {
-      fetch(`http://localhost:4000/api/customer/${detail.name}`, {
+      fetch(`http://localhost:4000/api/customer/${customer.name}`, {
         method: "DELETE",
-      }).then((response) => console.log(response));
-
-      setTimeout(() => {
-        fetch("http://localhost:4000/api/customer", {
-          method: "GET",
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          setCustomers(responseData);
+          setFilteredCustomers(responseData);
         })
-          .then((response) => response.json())
-          .then((responseData) => {
-            setCustomers(responseData);
-          })
-          .catch((error) => console.log(error));
-      }, 100);
+        .catch((error) => console.log(error));
+
     } catch (err) {
       console.log(err);
     }
@@ -73,7 +66,7 @@ const CustomerList = () => {
         customer.name.toLowerCase().includes(searchinput.toLowerCase())
       );
       setFilteredCustomers(filtered);
-    } 
+    }
   };
 
   return (
@@ -124,30 +117,30 @@ const CustomerList = () => {
           </thead>
           <tbody>
             {filteredCustomers.length !== 0 &&
-              filteredCustomers.map((detail, i) => (
-                <tr key={`${detail} + ${i}`}>
-                  <td>{detail.name}</td>
-                  <td>{detail.website}</td>
-                  <td>{detail.ceo}</td>
-                  <td>{detail.year}</td>
-                  <td>{detail.turnover}</td>
-                  <td>{detail.employees}</td>
+              filteredCustomers.map((customer, i) => (
+                <tr key={`${customer} + ${i}`}>
+                  <td>{customer.name}</td>
+                  <td>{customer.website}</td>
+                  <td>{customer.ceo}</td>
+                  <td>{customer.year}</td>
+                  <td>{customer.turnover}</td>
+                  <td>{customer.employees}</td>
                   <td
                     className={
-                      detail.status === "New"
+                      customer.status === "New"
                         ? "status-new"
-                        : detail.status === "Accepted"
+                        : customer.status === "Accepted"
                         ? "status-accepted"
                         : "status-rejected"
                     }
                   >
-                    {detail.status}
+                    {customer.status}
                   </td>
                   <td>
                     <Button
                       onClick={(e) => {
                         e.preventDefault();
-                        handleEdit(detail.name);
+                        handleEdit(customer.name);
                       }}
                       className="btn btn-warning floatRight"
                     >
@@ -158,7 +151,7 @@ const CustomerList = () => {
                     <Button
                       onClick={(e) => {
                         e.preventDefault();
-                        handleDelete(detail);
+                        handleDelete(customer);
                       }}
                       className="btn btn-danger floatRight"
                     >

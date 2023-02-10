@@ -1,6 +1,6 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+
+import crm_image from "../../../assets/crm-image.jpg"
+import { Button,Form } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -41,8 +41,8 @@ const UserForm = () => {
     <div className="container">
       <div className="left">
         <img
-          src="https://img.freepik.com/premium-vector/crm-icons-customer-relationship-management-vector-infographics-template_116137-3703.jpg"
-          alt="app-logo"
+          src={crm_image}
+          alt="crm_image"
         />
       </div>
       <div className="right">
