@@ -1,35 +1,72 @@
-
 import NavBar from "../../Navbar/NavBar";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Container,Button,Form } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, Button, Form } from "react-bootstrap";
+
+import { Dropdown } from "primereact/dropdown";
 
 const TicketForm = () => {
-    const [formDetails, setFormDetails] = useState({
-        customer: "",
-        desc: "",
-        assignedTo: "",
-        raisedOn: "",
-        status: "",
-      });
+  const [ticket, setTicket] = useState({
+    customer: "Select a customer",
+    desc: "",
+    assignedTo: "Select a user",
+    raisedOn: "",
+    status: "Status of ticket",
+  });
 
-      const navigate = useNavigate();
 
-      const handlePostData = () => {
-        fetch("http://localhost:4000/api/ticket",{
-            method: "POST",
-            body: JSON.stringify(formDetails),
-            headers:{
-                "Content-Type": "application/json",
-            }
-        }).then(response => {
-            if(response.ok) {
-                navigate("/ticketList")
-            }else{
-                console.log(response);
-            }
+  const [customers, setCustomers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const statusArray = ["New", "Assigned", "In Progress", "Resolved"];
+
+  const navigate = useNavigate();
+  const { description } = useParams();
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/customer")
+      .then((response) => response.json())
+      .then((responsedata) => setCustomers(responsedata))
+      .catch((error) => console.log(error));
+
+    fetch("http://localhost:4000/api/user")
+      .then((response) => response.json())
+      .then((responsedata) => setUsers(responsedata))
+      .catch((error) => console.log(error));
+
+    handleEdit();
+  }, []);
+
+  const handleEdit = async () => {
+    if (description) {
+      let res = await fetch("http://localhost:4000/api/ticket/" + description)
+        .then((response) => response.json())
+        .then((responsedata) => {
+          setTicket(responsedata);
+          console.log(ticket);
         })
+        .catch((error) => console.log(error));
+    }
+  };
+
+  const handlePostData = () => {
+    // console.log(description);
+    let methodName = description ? "PUT" : "POST";
+    console.log(ticket);
+    fetch("http://localhost:4000/api/ticket", {
+      method: methodName,
+      body: JSON.stringify(ticket),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        navigate("/ticketList");
+      } else {
+        console.log(response);
       }
+    });
+  };
+
   return (
     <>
       <NavBar />
@@ -40,14 +77,23 @@ const TicketForm = () => {
           <Form>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Customer Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter customer name"
-                value={formDetails.customer}
-                onChange={(e) =>
-                  setFormDetails({ ...formDetails, customer: e.target.value })
-                }
-              />
+              <div>
+                <Dropdown
+                  value={ticket.customer}
+                  onChange={(e) => {
+                    setTicket({
+                      ...ticket,
+                      customer: e.target.value.name,
+                    });
+                  }}
+                  options={customers}
+                  optionLabel="name"
+                  placeholder={ticket.customer}
+                  disabled={description}
+                  filter
+                  className="w-full"
+                />
+              </div>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicDescription">
@@ -55,60 +101,62 @@ const TicketForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Enter Description"
-                value={formDetails.desc}
-                onChange={(e) =>
-                  setFormDetails({ ...formDetails, desc: e.target.value })
-                }
+                value={ticket.desc}
+                onChange={(e) => setTicket({ ...ticket, desc: e.target.value })}
               />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicAssigination">
               <Form.Label>Assigned To</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter who is assigned"
-                value={formDetails.assignedTo}
-                onChange={(e) =>
-                  setFormDetails({ ...formDetails, assignedTo: e.target.value })
-                }
-              />
+              <div>
+                <Dropdown
+                  value={ticket.assignedTo}
+                  onChange={(e) => {
+                    setTicket({
+                      ...ticket,
+                      assignedTo: e.target.value.name,
+                    });
+                  }}
+                  options={users}
+                  optionLabel="name"
+                  placeholder={ticket.assignedTo}
+                  filter
+                  className="w-full"
+                />
+              </div>
             </Form.Group>
 
-
+            <Form.Group className="mb-3" controlId="formBasicStatus">
+              <Form.Label>Status</Form.Label>
+              <div>
+                <Dropdown
+                  value={ticket.status}
+                  onChange={(e) => {
+                    setTicket({
+                      ...ticket,
+                      status: e.target.value,
+                    });
+                  }}
+                  options={statusArray}
+                  placeholder={ticket.status}
+                  className="w-full"
+                />
+              </div>
+            </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicRaisedDate">
               <Form.Label>Date</Form.Label>
               <Form.Control
+                disabled={description}
                 type="date"
                 placeholder="Date"
-                value={formDetails.raisedOn}
+                value={ticket.raisedOn}
                 onChange={(e) =>
-                  setFormDetails({ ...formDetails, raisedOn: e.target.value })
+                  setTicket({ ...ticket, raisedOn: e.target.value })
                 }
               />
             </Form.Group>
 
-
-            <Form.Group className="mb-3" controlId="formBasicStatus">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                onChange={(e) => {
-                  e.preventDefault();
-                  setFormDetails({
-                    ...formDetails,
-                    status: e.target.value,
-                  });
-                }}
-              >
-                {/* <option>Status</option>. */}
-                <option aria-label="Default select example" value="New">
-                  New
-                </option>
-                <option value="Assigned">Assigned</option>
-                <option value="InProgress">In Progress</option>
-                <option value="Rejected">Rejected</option>
-              </Form.Select>
-            </Form.Group>
             <Button
               variant="primary"
               type="submit"
@@ -118,7 +166,7 @@ const TicketForm = () => {
                 handlePostData();
               }}
             >
-              Create Ticket
+              {description ? "Update ticket" : "Create ticket"}
             </Button>
           </Form>
         </div>

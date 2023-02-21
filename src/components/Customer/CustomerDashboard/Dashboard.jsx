@@ -1,7 +1,16 @@
 import "./Dashboard.css";
+import { useState, useEffect } from "react";
 
-const Dashboard = ({ customers }) => {
-    
+const Dashboard = () => {
+  const [customers, setCustomers] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/customer")
+      .then((response) => response.json())
+      .then((responseData) => setCustomers(responseData))
+      .catch((error) => console.error(error));
+  }, []);
+
   const totalCustomer = customers.length;
   const newCustomers = customers.filter((c) => c.status === "New").length;
   const acceptedCustomers = customers.filter(

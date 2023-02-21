@@ -4,7 +4,7 @@ import { InputGroup, Form, Button, Alert, Table } from "react-bootstrap";
 import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
-import Dashboard from "../Dashboard/Dashboard";
+import Dashboard from "../CustomerDashboard/Dashboard";
 import NavBar from "../../Navbar/NavBar";
 import "./CustomerList.css";
 import PaginationTab from "../../Pagination/PaginationTab";
@@ -21,16 +21,12 @@ const CustomerList = () => {
   }, []);
 
   const loadPage = (pageNo) => {
-    fetch("http://localhost:4000/api/customer/page/" + pageNo, {
-      method: "GET",
-    })
+    fetch("http://localhost:4000/api/customer/page/" + pageNo)
       .then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData);
         setCustomers(responseData.records);
         setFilteredCustomers(responseData.records);
         const totalPages = Math.ceil(responseData.totalCount / 100);
-        // console.log(totalPages);
         const pages = new Array(totalPages).fill(0);
         setPages(pages);
       })
@@ -42,31 +38,22 @@ const CustomerList = () => {
   };
 
   const handleDelete = (customer) => {
-    try {
-      fetch(`http://localhost:4000/api/customer/${customer.name}`, {
-        method: "DELETE",
+    fetch(`http://localhost:4000/api/customer/${customer.name}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        setCustomers(responseData);
+        setFilteredCustomers(responseData);
       })
-        .then((response) => response.json())
-        .then((responseData) => {
-          setCustomers(responseData);
-          setFilteredCustomers(responseData);
-        })
-        .catch((error) => console.log(error));
-
-    } catch (err) {
-      console.log(err);
-    }
+      .catch((error) => console.log(error));
   };
 
   const handleSearch = (searchinput) => {
-    if (!searchinput) {
-      setFilteredCustomers(customers);
-    } else {
       const filtered = customers.filter((customer) =>
         customer.name.toLowerCase().includes(searchinput.toLowerCase())
       );
       setFilteredCustomers(filtered);
-    }
   };
 
   return (
@@ -75,7 +62,7 @@ const CustomerList = () => {
       <div className="container-fluid">
         <div className="list-header">
           <div className="dashboard">
-            <Dashboard customers={customers} />
+            <Dashboard />
           </div>
           <hr />
           <div className="sub-header">
@@ -101,7 +88,7 @@ const CustomerList = () => {
         </div>
 
         <h1 className="center-header">Customer Details</h1>
-        <Table variant="dark" className="app__table" responsive>
+        <Table variant="light" className="app__table" responsive>
           <thead>
             <tr>
               <th>Name</th>

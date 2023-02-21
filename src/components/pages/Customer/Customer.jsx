@@ -70,6 +70,15 @@ const Customer = () => {
             </SecuredRoutes>
           }
         />
+
+        <Route
+          path="/ticketForm/:description"
+          element={
+            <SecuredRoutes>
+              <TicketForm />
+            </SecuredRoutes>
+          }
+        />
       </Routes>
     </Router>
   );
