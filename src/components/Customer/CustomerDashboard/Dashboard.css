@@ -10,20 +10,37 @@
     width: 25%;
     height: 20%;
     border: 1px solid lightgray;
-    padding: 2rem 2.5rem;
+    padding: 1.2rem .7rem;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.leftFloat{
+    display: flex;
+    padding: 0.5rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.rightFloat{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+    font-weight: 600;
 }
 
 .total-customers{
-    background-color: gray;
+    background-color: grey;
     color: black;
 }
 
 .new-customers{
-    background-color: rgba(86, 86, 224, 0.906);
+    background-color: rgba(110, 110, 235, 0.977);
     color: black;
 }
 

@@ -28,15 +28,15 @@
 }
 
 .status-new{
-  background: rgb(74, 74, 228)  !important;
+  background-color: rgba(110, 110, 235, 0.977)  !important;
 }
 
 .status-accepted{
-  background: rgba(96, 238, 96, 0.904) !important;
+  background: greenyellow !important;
 }
 
 .status-rejected{
-  background: rgba(225, 66, 66, 0.959) !important;
+  background-color: rgba(220, 87, 87, 0.922) !important;
 }
 
 

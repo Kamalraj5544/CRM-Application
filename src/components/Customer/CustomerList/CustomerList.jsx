@@ -50,10 +50,10 @@ const CustomerList = () => {
   };
 
   const handleSearch = (searchinput) => {
-      const filtered = customers.filter((customer) =>
-        customer.name.toLowerCase().includes(searchinput.toLowerCase())
-      );
-      setFilteredCustomers(filtered);
+    const filtered = customers.filter((customer) =>
+      customer.name.toLowerCase().includes(searchinput.toLowerCase())
+    );
+    setFilteredCustomers(filtered);
   };
 
   return (
@@ -61,6 +61,7 @@ const CustomerList = () => {
       <NavBar />
       <div className="container-fluid">
         <div className="list-header">
+          <h1 className="center-header">Customer Details</h1>
           <div className="dashboard">
             <Dashboard />
           </div>
@@ -87,7 +88,8 @@ const CustomerList = () => {
           </div>
         </div>
 
-        <h1 className="center-header">Customer Details</h1>
+        <hr />
+
         <Table variant="light" className="app__table" responsive>
           <thead>
             <tr>

@@ -23,20 +23,26 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="total-customers tile">
-        <h3>Total</h3>
-        <h4>{totalCustomer}</h4>
+        <div className="leftFloat">
+          <div>Total</div>
+        </div>
+        <hr />
+        <div className="rightFloat">{totalCustomer}</div>
       </div>
       <div className="new-customers tile">
-        <h3>New</h3>
-        <h4>{newCustomers}</h4>
+        <div className="leftFloat">New</div>
+        <hr />
+        <div className="rightFloat">{newCustomers}</div>
       </div>
       <div className="accpeted-customers tile">
-        <h3>Accepted</h3>
-        <h4>{acceptedCustomers}</h4>
+        <div className="leftFloat">Accepted</div>
+        <hr />
+        <div className="rightFloat">{acceptedCustomers}</div>
       </div>
       <div className="rejected-customers tile">
-        <h3>Rejected</h3>
-        <h4>{rejectedCustomers}</h4>
+        <div className="leftFloat">Rejected</div>
+        <hr />
+        <div className="rightFloat">{rejectedCustomers}</div>
       </div>
     </div>
   );

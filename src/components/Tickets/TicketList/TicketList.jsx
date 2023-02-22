@@ -1,9 +1,10 @@
 import NavBar from "../../Navbar/NavBar";
-import { Table, Button,Form,InputGroup } from "react-bootstrap";
+import { Table, Button, Form, InputGroup } from "react-bootstrap";
 import { RiSearchLine } from "react-icons/ri";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TicketDashboard from "../TicketDashboard/TicketDashboard";
 
 const TicketList = () => {
   const [tickets, setTickets] = useState([]);
@@ -15,7 +16,7 @@ const TicketList = () => {
     fetch("http://localhost:4000/api/ticket")
       .then((response) => response.json())
       .then((responseData) => {
-        setFilteredTickets(responseData)
+        setFilteredTickets(responseData);
         setTickets(responseData);
       })
       .catch((error) => console.log(error));
@@ -27,37 +28,60 @@ const TicketList = () => {
   };
 
   const handleSearch = (desc) => {
-      let filtered = tickets.filter(ticket => ticket.desc.toLowerCase().includes(desc.toLowerCase()));
-      setFilteredTickets(filtered);
-  }
+    let filtered = tickets.filter((ticket) =>
+      ticket.desc.toLowerCase().includes(desc.toLowerCase())
+    );
+    setFilteredTickets(filtered);
+  };
+
+  const statusBgColor = (status) => {
+    if (status === "New") return "new-tickets";
+    else if (status === "Assigned") return "assigned-tickets";
+    else if (status === "In Progress") return "inProgress-tickets";
+    else if (status === "Resolved") return "resolved-tickets";
+  };
 
   return (
     <div>
       <NavBar />
       <div className="container-fluid">
         <div>
-          <h2 className="center-header">Ticket List Of Customers</h2>
-          <div className="sub-header">
-            <Button variant="primary" onClick={() => navigate("/ticketForm")}>
-              Raise ticket
-            </Button>
+          <div className="list-header">
             <div>
-              <InputGroup className="mb-2">
-                <Form.Control
-                  placeholder="Search description..."
-                  aria-describedby="basic-addon2"
-                  onChange={(e) => handleSearch(e.target.value)}
-                />
-                <Button variant="outline-secondary" id="button-addon2">
-                  <RiSearchLine />
+              <h2 className="center-header">Ticket List Of Customers</h2>
+              <hr />
+            </div>
+            <div className="dashboard">
+              <TicketDashboard tickets={tickets} />
+            </div>
+            <hr />
+            <div className="sub-header">
+              <div>
+                <Button
+                  variant="primary"
+                  onClick={() => navigate("/ticketForm")}
+                >
+                  Raise ticket
                 </Button>
-              </InputGroup>
+              </div>
+              <div>
+                <InputGroup className="mb-2">
+                  <Form.Control
+                    placeholder="Search description..."
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => handleSearch(e.target.value)}
+                  />
+                  <Button variant="outline-secondary" id="button-addon2">
+                    <RiSearchLine />
+                  </Button>
+                </InputGroup>
+              </div>
             </div>
           </div>
-
-          <hr />
         </div>
-        <Table hover variant="dark">
+
+        <hr />
+        <Table variant="light">
           <thead>
             <tr>
               <th>Customer Name</th>
@@ -73,7 +97,9 @@ const TicketList = () => {
               <tr>
                 <td>{ticket.customer}</td>
                 <td>{ticket.desc}</td>
-                <td>{ticket.status}</td>
+                <td className={statusBgColor(ticket.status)}>
+                  {ticket.status}
+                </td>
                 <td>{ticket.assignedTo}</td>
                 <td>{ticket.raisedOn}</td>
                 <td>

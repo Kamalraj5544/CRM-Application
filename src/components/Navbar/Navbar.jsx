@@ -34,11 +34,13 @@ const NavBar = () => {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="nav-bar">
           <Navbar.Brand>
-            <img
+          <Nav.Link href="/">
+          <img
               src={logo}
               alt="app-logo"
               className="logo"
             />
+          </Nav.Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
