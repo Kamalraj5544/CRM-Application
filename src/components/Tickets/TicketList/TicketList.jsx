@@ -1,4 +1,4 @@
-import NavBar from "../../Navbar/NavBar";
+import NavBar from "../../Navbar/NavBar/NavBar";
 import TicketDashboard from "../TicketDashboard/TicketDashboard";
 
 import { Table, Button, Form, InputGroup } from "react-bootstrap";

@@ -3,7 +3,7 @@ import { Button, Alert, Table } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import NavBar from "../../Navbar/NavBar";
+import NavBar from "../../Navbar/NavBar/NavBar";
 
 const UserList = () => {
   const [usersAvailable, setUsersAvailable] = useState([]);

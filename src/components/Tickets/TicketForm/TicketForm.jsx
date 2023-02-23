@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Container, Button, Form } from "react-bootstrap";
 import { Dropdown } from "primereact/dropdown";
 
-import NavBar from "../../Navbar/NavBar";
+import NavBar from "../../Navbar/NavBar/NavBar";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
