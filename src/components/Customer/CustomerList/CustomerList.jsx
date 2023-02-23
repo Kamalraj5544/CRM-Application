@@ -9,6 +9,8 @@ import NavBar from "../../Navbar/NavBar";
 import "./CustomerList.css";
 import PaginationTab from "../../Pagination/PaginationTab";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
   const [filteredCustomers, setFilteredCustomers] = useState([]);
@@ -21,7 +23,7 @@ const CustomerList = () => {
   }, []);
 
   const loadPage = (pageNo) => {
-    fetch("http://localhost:4000/api/customer/page/" + pageNo)
+    fetch(BASE_URL+"customer/page/" + pageNo)
       .then((response) => response.json())
       .then((responseData) => {
         setCustomers(responseData.records);
@@ -38,7 +40,7 @@ const CustomerList = () => {
   };
 
   const handleDelete = (customer) => {
-    fetch(`http://localhost:4000/api/customer/${customer.name}`, {
+    fetch(BASE_URL +`customer/${customer.name}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

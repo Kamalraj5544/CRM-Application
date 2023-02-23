@@ -11,9 +11,8 @@ const UserList = () => {
 
   const handleIsActive = (username, isActive) => {
     fetch(
-      `http://localhost:4000/api/user/${
-        isActive ? "deActivate" : "activate"
-      }/${username}`,
+      process.env.REACT_APP_API_URL +
+        `user/${isActive ? "deActivate" : "activate"}/${username}`,
       {
         method: "PUT",
         headers: {
@@ -30,7 +29,7 @@ const UserList = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/user", {
+    fetch(process.env.REACT_APP_API_URL + "user", {
       method: "GET",
     })
       .then((response) => response.json())

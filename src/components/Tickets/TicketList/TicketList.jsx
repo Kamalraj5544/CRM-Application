@@ -13,7 +13,7 @@ const TicketList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/ticket")
+    fetch(process.env.REACT_APP_API_URL+"ticket")
       .then((response) => response.json())
       .then((responseData) => {
         setFilteredTickets(responseData);

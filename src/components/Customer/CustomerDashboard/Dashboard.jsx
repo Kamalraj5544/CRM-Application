@@ -5,7 +5,8 @@ const Dashboard = () => {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/customer")
+    console.log(process.env.REACT_APP_API_URL);
+    fetch(process.env.REACT_APP_API_URL + "customer")
       .then((response) => response.json())
       .then((responseData) => setCustomers(responseData))
       .catch((error) => console.error(error));

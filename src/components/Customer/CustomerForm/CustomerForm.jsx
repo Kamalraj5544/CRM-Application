@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../../Navbar/NavBar";
 import "./CustomerForm.css";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 const CustomerForm = () => {
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -22,9 +24,11 @@ const CustomerForm = () => {
     status: "",
   });
 
+
+
   useEffect(() => {
     if (customerName) {
-      fetch("http://localhost:4000/api/customer/" + customerName)
+      fetch(BASE_URL+"customer/" + customerName)
         .then((res) => res.json())
         .then((customersData) => {
           console.log(customersData);
@@ -37,7 +41,7 @@ const CustomerForm = () => {
   const handlePostData = async () => {
     const methodName = customerName ? "PUT" : "POST";
     try {
-      let response = await fetch("http://localhost:4000/api/customer", {
+      let response = await fetch(BASE_URL+"customer", {
         method: methodName,
         body: JSON.stringify(formDetails),
         headers: {

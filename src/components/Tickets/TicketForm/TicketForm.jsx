@@ -6,6 +6,8 @@ import { Dropdown } from "primereact/dropdown";
 
 import NavBar from "../../Navbar/NavBar";
 
+const BASE_URL = process.env.REACT_APP_API_URL;
+
 const TicketForm = () => {
   const [ticket, setTicket] = useState({
     customer: "Select a customer",
@@ -23,12 +25,12 @@ const TicketForm = () => {
   const { description } = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/customer")
+    fetch(BASE_URL + "customer")
       .then((response) => response.json())
       .then((responsedata) => setCustomers(responsedata))
       .catch((error) => console.log(error));
 
-    fetch("http://localhost:4000/api/user")
+    fetch(BASE_URL +"user")
       .then((response) => response.json())
       .then((responsedata) => setUsers(responsedata))
       .catch((error) => console.log(error));
@@ -38,7 +40,7 @@ const TicketForm = () => {
 
   const handleEdit = async () => {
     if (description) {
-      let res = await fetch("http://localhost:4000/api/ticket/" + description)
+      let res = await fetch(BASE_URL +"ticket/" + description)
         .then((response) => response.json())
         .then((responsedata) => {
           setTicket(responsedata);
@@ -52,7 +54,7 @@ const TicketForm = () => {
     // console.log(description);
     let methodName = description ? "PUT" : "POST";
     console.log(ticket);
-    fetch("http://localhost:4000/api/ticket", {
+    fetch(BASE_URL +"ticket", {
       method: methodName,
       body: JSON.stringify(ticket),
       headers: {

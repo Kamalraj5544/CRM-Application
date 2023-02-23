@@ -19,13 +19,16 @@ const UserForm = () => {
     let apiResponse;
     console.log(userDetails);
     try {
-      const response = await fetch("http://localhost:4000/api/user/signup", {
-        method: "POST",
-        body: JSON.stringify(userDetails),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + "user/signup",
+        {
+          method: "POST",
+          body: JSON.stringify(userDetails),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((response) => (apiResponse = response))
         .catch((err) => console.log(err));
       console.log(apiResponse);
