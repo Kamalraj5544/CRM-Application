@@ -1,5 +1,5 @@
 import { Nav, Navbar, Button } from "react-bootstrap";
-import SideMenu from "./SideMenu/SideMenu";
+import SideMenu from "../SideMenu/SideMenu";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

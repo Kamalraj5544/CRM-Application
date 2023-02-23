@@ -3,7 +3,7 @@ import { Button, Form, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import NavBar from "../../Navbar/NavBar.jsx";
+import NavBar from "../../Navbar/NavBar/NavBar.jsx";
 import "./CustomerForm.css";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
@@ -24,11 +24,9 @@ const CustomerForm = () => {
     status: "",
   });
 
-
-
   useEffect(() => {
     if (customerName) {
-      fetch(BASE_URL+"customer/" + customerName)
+      fetch(BASE_URL + "customer/" + customerName)
         .then((res) => res.json())
         .then((customersData) => {
           console.log(customersData);
@@ -41,7 +39,7 @@ const CustomerForm = () => {
   const handlePostData = async () => {
     const methodName = customerName ? "PUT" : "POST";
     try {
-      let response = await fetch(BASE_URL+"customer", {
+      let response = await fetch(BASE_URL + "customer", {
         method: methodName,
         body: JSON.stringify(formDetails),
         headers: {

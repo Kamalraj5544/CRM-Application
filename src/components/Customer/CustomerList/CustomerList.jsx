@@ -5,7 +5,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 import Dashboard from "../CustomerDashboard/Dashboard";
-import NavBar from "../../Navbar/NavBar";
+import NavBar from "../../Navbar/NavBar/NavBar";
 import PaginationTab from "../../Pagination/PaginationTab";
 import "./CustomerList.css";
 
@@ -23,7 +23,7 @@ const CustomerList = () => {
   }, []);
 
   const loadPage = (pageNo) => {
-    fetch(BASE_URL+"customer/page/" + pageNo)
+    fetch(BASE_URL + "customer/page/" + pageNo)
       .then((response) => response.json())
       .then((responseData) => {
         setCustomers(responseData.records);
@@ -40,7 +40,7 @@ const CustomerList = () => {
   };
 
   const handleDelete = (customer) => {
-    fetch(BASE_URL +`customer/${customer.name}`, {
+    fetch(BASE_URL + `customer/${customer.name}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
