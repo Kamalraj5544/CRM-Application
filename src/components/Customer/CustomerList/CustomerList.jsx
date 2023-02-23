@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 import Dashboard from "../CustomerDashboard/Dashboard";
 import NavBar from "../../Navbar/NavBar";
-import "./CustomerList.css";
 import PaginationTab from "../../Pagination/PaginationTab";
+import "./CustomerList.css";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
