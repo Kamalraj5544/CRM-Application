@@ -1,15 +1,15 @@
 import NavBar from "../../Navbar/NavBar";
+import TicketDashboard from "../TicketDashboard/TicketDashboard";
+
 import { Table, Button, Form, InputGroup } from "react-bootstrap";
 import { RiSearchLine } from "react-icons/ri";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TicketDashboard from "../TicketDashboard/TicketDashboard";
 
 const TicketList = () => {
   const [tickets, setTickets] = useState([]);
   const [filteredTickets, setFilteredTickets] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -1,9 +1,10 @@
-import NavBar from "../../Navbar/NavBar";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Button, Form } from "react-bootstrap";
 
+import { Container, Button, Form } from "react-bootstrap";
 import { Dropdown } from "primereact/dropdown";
+
+import NavBar from "../../Navbar/NavBar";
 
 const TicketForm = () => {
   const [ticket, setTicket] = useState({
@@ -13,7 +14,6 @@ const TicketForm = () => {
     raisedOn: "",
     status: "Status of ticket",
   });
-
 
   const [customers, setCustomers] = useState([]);
   const [users, setUsers] = useState([]);

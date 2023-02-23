@@ -1,6 +1,4 @@
-import "./App.css";
 import Customer from "./components/pages/Customer/Customer";
-
 
 function App() {
   return (

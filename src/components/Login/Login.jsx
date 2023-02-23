@@ -4,7 +4,9 @@ import { FiLogIn } from "react-icons/fi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import crm_image from "../../assets/crm-image.jpg"
 import "./Login.css";
+
 
 const Login = () => {
   const [userDetails, setUserDetails] = useState({
@@ -45,7 +47,7 @@ const Login = () => {
     <div className="container">
       <div className="left">
         <img
-          src="https://img.freepik.com/premium-vector/crm-icons-customer-relationship-management-vector-infographics-template_116137-3703.jpg"
+          src={crm_image}
           alt="app-logo"
         />
       </div>

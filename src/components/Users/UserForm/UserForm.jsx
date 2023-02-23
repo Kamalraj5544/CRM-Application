@@ -1,6 +1,6 @@
+import crm_image from "../../../assets/crm-image.jpg";
 
-import crm_image from "../../../assets/crm-image.jpg"
-import { Button,Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -40,10 +40,7 @@ const UserForm = () => {
   return (
     <div className="container">
       <div className="left">
-        <img
-          src={crm_image}
-          alt="crm_image"
-        />
+        <img src={crm_image} alt="crm_image" />
       </div>
       <div className="right">
         <h2>Enter the user details...</h2>
@@ -98,9 +95,13 @@ const UserForm = () => {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Terms and Conditions" onChange={(e) =>
+            <Form.Check
+              type="checkbox"
+              label="Terms and Conditions"
+              onChange={(e) =>
                 setUserDetails({ ...userDetails, isActive: e.target.checked })
-              }  />
+              }
+            />
           </Form.Group>
           <div className="d-grid gap-1">
             <Button

@@ -1,21 +1,21 @@
 .button {
-    margin: 0.75rem;
-    width: 85px;
+  margin: 0.75rem;
+  width: 85px;
 }
 
-.buttons{
-    display: flex;
-    flex-direction: row;
+.buttons {
+  display: flex;
+  flex-direction: row;
 }
 
-.logo{
-    padding: 0;
-    width: 5rem;
-    height: 4rem;
-    object-fit: cover;
-    mix-blend-mode: color-dodge;
+.logo {
+  padding: 0;
+  width: 5rem;
+  height: 4rem;
+  object-fit: cover;
+  mix-blend-mode: color-dodge;
 }
 
-.nav-bar{
-    padding: 0 2rem !important;
+.nav-bar {
+  padding: 0 2rem !important;
 }

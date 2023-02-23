@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
 import { Button, Alert, Table } from "react-bootstrap";
+
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import NavBar from "../../Navbar/NavBar";
@@ -8,7 +9,7 @@ const UserList = () => {
   const [usersAvailable, setUsersAvailable] = useState([]);
   const navigate = useNavigate();
 
-  const handleIsActive = (username,isActive) => {
+  const handleIsActive = (username, isActive) => {
     fetch(
       `http://localhost:4000/api/user/${
         isActive ? "deActivate" : "activate"
@@ -49,14 +50,7 @@ const UserList = () => {
             Register user
           </Button>
         </div>
-        <Table
-          striped
-          bordered
-          hover
-          variant="dark"
-          className="app__table"
-          responsive
-        >
+        <Table bordered hover variant="light" className="app__table" responsive>
           <thead>
             <tr>
               <th>Name</th>
@@ -73,8 +67,13 @@ const UserList = () => {
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
-                    { 
-                      <Button variant={user.isActive ? "danger" : "success"} onClick={() => handleIsActive(user.username,user.isActive)}>
+                    {
+                      <Button
+                        variant={user.isActive ? "danger" : "success"}
+                        onClick={() =>
+                          handleIsActive(user.username, user.isActive)
+                        }
+                      >
                         {user.isActive ? "Deactivate" : "Activate"}
                       </Button>
                     }

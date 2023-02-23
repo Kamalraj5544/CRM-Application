@@ -23,7 +23,6 @@ const CustomerForm = () => {
   });
 
   useEffect(() => {
-
     if (customerName) {
       fetch("http://localhost:4000/api/customer/" + customerName)
         .then((res) => res.json())
@@ -36,7 +35,6 @@ const CustomerForm = () => {
   }, []);
 
   const handlePostData = async () => {
-
     const methodName = customerName ? "PUT" : "POST";
     try {
       let response = await fetch("http://localhost:4000/api/customer", {

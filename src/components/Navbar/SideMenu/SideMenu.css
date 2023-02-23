@@ -1,0 +1,14 @@
+.sideBar-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.sideBar-link {
+  color: black !important;
+  text-decoration: none;
+}

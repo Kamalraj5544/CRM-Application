@@ -1,55 +1,55 @@
-.dashboard-container{
-    display: flex;
-    flex: 1;
-    justify-content: space-around;
-    align-items: center;
-    gap: 1.5rem
+.dashboard-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.tile{
-    width: 25%;
-    height: 20%;
-    border: 1px solid lightgray;
-    padding: 1.2rem .7rem;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
+.tile {
+  width: 25%;
+  height: 20%;
+  border: 1px solid lightgray;
+  padding: 1.2rem 0.7rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
-.leftFloat{
-    display: flex;
-    padding: 0.5rem;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: x-large;
-    font-weight: 700;
+.leftFloat {
+  display: flex;
+  padding: 0.5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: x-large;
+  font-weight: 700;
 }
 
-.rightFloat{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding: 0.5rem;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: x-large;
-    font-weight: 600;
+.rightFloat {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0.5rem;
+  font-family: "Times New Roman", Times, serif;
+  font-size: x-large;
+  font-weight: 600;
 }
 
-.total-customers{
-    background-color: grey;
-    color: black;
+.total-customers {
+  background-color: grey;
+  color: black;
 }
 
-.new-customers{
-    background-color: rgba(110, 110, 235, 0.977);
-    color: black;
+.new-customers {
+  background-color: rgba(110, 110, 235, 0.977);
+  color: black;
 }
 
-.accpeted-customers{
-    background-color: greenyellow;
-    color: black;
+.accpeted-customers {
+  background-color: greenyellow;
+  color: black;
 }
 
-.rejected-customers{
-    background-color: rgba(220, 87, 87, 0.922);
-    color: black;
+.rejected-customers {
+  background-color: rgba(220, 87, 87, 0.922);
+  color: black;
 }

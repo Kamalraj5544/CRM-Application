@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import CustomerForm from "../../Customer/CustomerForm/CustomerForm";
 import CustomerList from "../../Customer/CustomerList/CustomerList";
-import Login from "../../Login & SignUp/Login/Login";
+import Login from "../../Login/Login";
 import SecuredRoutes from "../../SecuredRoutes/SecuredRoutes";
 import TicketForm from "../../Tickets/TicketForm/TicketForm";
 import TicketList from "../../Tickets/TicketList/TicketList";

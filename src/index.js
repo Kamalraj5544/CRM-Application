@@ -4,13 +4,9 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";     
-    
-//core
+// primereact imports
+import "primereact/resources/themes/lara-light-indigo/theme.css";      
 import "primereact/resources/primereact.min.css";
-
-//icons
 import "primeicons/primeicons.css";                                         
         
 
