@@ -3,7 +3,7 @@ import { Button, Form, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import NavBar from "../../Navbar/NavBar";
+import NavBar from "../../Navbar/NavBar.jsx";
 import "./CustomerForm.css";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
